@@ -9,7 +9,7 @@ class Extra(commands.Cog):
   async def pingu(self, ctx):
     embed = discord.Embed(description = f"nook nook", color = random.randint(0, 16777215))
     embed.set_image(url = "https://i.imgur.com/Z6NURwi.gif")
-    embed.set_author(name = f"Pingu has been summoned by {ctx.author}:", icon_url = ctx.author.avatar_url)
+    embed.set_author(name = f"Pingu has been summoned by {ctx.author}:", icon_url = ctx.author.display_avatar.url)
     await ctx.send("nook nook", embed = embed)
 
 async def setup(bot):

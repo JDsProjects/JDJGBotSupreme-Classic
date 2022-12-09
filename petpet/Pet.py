@@ -110,7 +110,7 @@ async def get_pet(message,channel):
   if message.attachments:
     _img = message.attachments[0]
   if not message.attachments:
-    _img = message.author.avatar_url
+    _img = message.author.display_avatar
   byteBufferThing = await  _img.read()
   f = open("./petpet/tmp.png", "wb")
   f.write(byteBufferThing)

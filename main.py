@@ -407,7 +407,7 @@ async def mchistory(ctx,*,args=None):
         embed.add_field(name=f"Username:\n{x['name']}",value=f"Date Changed:\n{x['changedToAt']}\n \nTime Changed: \n {x['timeChangedAt']}")
 
       y = y + 1
-    embed.set_author(name=f"Requested by {ctx.author}",icon_url=(ctx.author.avatar_url))
+    embed.set_author(name=f"Requested by {ctx.author}",icon_url=(ctx.author.display_avatar.url))
     await ctx.send(embed=embed)
 
 @client.command(help="a command to backup text",brief="please don't upload any private files that aren't meant to be seen")
@@ -461,7 +461,7 @@ async def invite(ctx):
   embed  = discord.Embed(title = "The Invite Links!", value = "One is for testing, one is the normal bot.",color=random.randint(0, 16777215))
   embed.add_field(name = "Testing Link:", value = "https://discordapp.com/oauth2/authorize?client_id=702243652960780350&scope=bot&permissions=8", inline = False)
   embed.add_field(name = "Normal Invite:", value = f"https://discordapp.com/oauth2/authorize?client_id={client.user.id}&scope=bot&permissions=8", inline = False)
-  embed.set_thumbnail(url=(client.user.avatar_url))
+  embed.set_thumbnail(url=(client.user.display_avatar.url))
   await ctx.send(embed=embed)
 
 @client.command(help="gives the id of the current guild or DM if you are in one.")
