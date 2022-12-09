@@ -367,7 +367,7 @@ async def triggered(ctx):
         pass
 
   if len(ctx.message.attachments) == 0 or y == 0:
-    url = ctx.author.avatar_url_as(format="png")
+    url = ctx.author.display_avatar.with_format(format="png")
     await triggered_converter(url,ctx)
 
 @client.command(help="uploads your emojis into a mystbin link")
@@ -451,7 +451,7 @@ async def bloopers(ctx,*,args=None):
       await apply_user.create_dm()
     
     embed_message = discord.Embed(title=args,color=random.randint(0, 16777215),timestamp=(ctx.message.created_at))
-    embed_message.set_author(name=f"Application from {ctx.author}",icon_url=(ctx.author.avatar_url))
+    embed_message.set_author(name=f"Application from {ctx.author}",icon_url=(ctx.author.display_avatar.url))
     embed_message.set_footer(text = f"{ctx.author.id}")
     embed_message.set_thumbnail(url="https://i.imgur.com/PfWlEd5.png")
     await apply_user.send(embed=embed_message)
@@ -484,7 +484,7 @@ async def random_history(ctx,*,args=None):
 @client.command(help="a way to view open source",brief="you can see the open source with the link it provides",aliases=["open source"])
 async def open_source(ctx):
   source_send=discord.Embed(title="Project at: https://github.com/JDJGInc/JDJGBotSupreme", description="Want to get more info, contact the owner with the JDBot*owner command",color=random.randint(0, 16777215))
-  source_send.set_author(name=f"{client.user} Source Code:",icon_url=(client.user.avatar_url))
+  source_send.set_author(name=f"{client.user} Source Code:",icon_url=(client.user.display_avatar.url))
   await ctx.send(embed=source_send)
 
 @client.command(help="a command to tell you the channel id")
@@ -553,7 +553,7 @@ async def owner(ctx):
   embed.add_field(name="ID:",value=owner.id)
   embed.add_field(name="Status:",value=status)
   embed.add_field(name="Highest Role:",value=highest_role)
-  embed.set_image(url=owner.avatar_url)
+  embed.set_image(url=owner.display_avatar.url)
   await ctx.send(embed=embed)
   try:
     await RankSystem.GetStatus(ctx.message,owner)
@@ -619,7 +619,7 @@ async def coin(ctx, *, args = None):
     url_dic = {"heads":"https://i.imgur.com/MzdU5Z7.png","Tails":"https://i.imgur.com/qTf1owU.png"}
 
     embed = discord.Embed(title="coin flip",color=random.randint(0, 16777215))
-    embed.set_author(name=f"{ctx.author}",icon_url=(ctx.author.avatar_url))
+    embed.set_author(name=f"{ctx.author}",icon_url=(ctx.author.display_avatar.url))
     embed.add_field(name="The Coin Flipped: "+("heads" if value else "tails"),value=f"You guessed: {args}")
     embed.set_image(url=url_dic[pic_name])
 
@@ -670,7 +670,7 @@ async def guildinfo(ctx,guild):
   embed.add_field(name="Bots:",value=bots)
   embed.add_field(name="Channel Count:",value=len(guild.channels))
   embed.add_field(name="Role Count:",value=len(guild.roles))
-  embed.set_thumbnail(url=(guild.icon_url))
+  embed.set_thumbnail(url=(guild.icon.url))
   embed.add_field(name="Emoji Limit:",value=guild.emoji_limit)
   embed.add_field(name="Max File Size:",value=f"{guild.filesize_limit/1000000} MB")
   embed.add_field(name="Shard ID:",value=guild.shard_id)
@@ -772,7 +772,7 @@ async def wink(ctx,*, Member: BetterMemberConverter=None):
   image=await sr_client.get_gif("wink")
 
   embed=discord.Embed(color=random.randint(0, 16777215))
-  embed.set_author(name=f"{person} winked at you",icon_url=(person.avatar_url))
+  embed.set_author(name=f"{person} winked at you",icon_url=(person.display_avatar.url))
   embed.set_image(url=image.url)
   embed.set_footer(text="powered by some random api")
 
