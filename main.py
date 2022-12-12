@@ -1,7 +1,3 @@
-import dotenv
-dotenv.load_dotenv()
-#quick dotenv load and env load
-
 import discord, os, random, asyncio, chardet, re, math, logging, mystbin, sr_api, asuna_api, aioimgur, time, async_cse
 #modules ^
 from discord.ext import commands
