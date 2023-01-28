@@ -568,7 +568,7 @@ async def team(ctx):
   embed=discord.Embed(title=information.name,color=random.randint(0, 16777215))
   embed.add_field(name="Owner",value=true_owner)
   embed.set_footer(text=f"ID: {true_owner.id}")
-  embed.set_image(url=information.icon.url if information.icon else self.bot.display_avatar.url)
+  embed.set_image(url=information.icon.url if information.icon else bot.display_avatar.url)
   for x in team_members:
     embed.add_field(name=x,value=x.id)
   await ctx.send(embed=embed)
