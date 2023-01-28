@@ -12,7 +12,7 @@ class Info(commands.Cog):
     if not guild:
       return await ctx.send("no guild to get the icon of.")
     
-    await ctx.send(f"{guild.icon_url if guild.icon_url else 'No Url for This Guild, I am sorry dude :('}")
+    await ctx.send(f"{guild.icon.url}" if guild.icon else "https://i.imgur.com/3ZUrjUP.png")
 
 async def setup(bot):
   await bot.add_cog(Info(bot))

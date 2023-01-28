@@ -568,7 +568,7 @@ async def team(ctx):
   embed=discord.Embed(title=information.name,color=random.randint(0, 16777215))
   embed.add_field(name="Owner",value=true_owner)
   embed.set_footer(text=f"ID: {true_owner.id}")
-  embed.set_image(url=(information.icon_url))
+  embed.set_image(url=information.icon.url if information.icon else self.bot.display_avatar.url)
   for x in team_members:
     embed.add_field(name=x,value=x.id)
   await ctx.send(embed=embed)
@@ -841,7 +841,7 @@ async def userinfo(ctx, *, user: BetterUserconverter = None):
   embed.add_field(name="ID:",value=user.id)
   embed.add_field(name="Status:",value=status)
   embed.add_field(name="Highest Role:",value=highest_role)
-  embed.set_image(url=user.avatar_url)
+  embed.set_image(url=user.display_avatar.url)
   await ctx.send(embed=embed)
 
   await RankSystem.GetStatus(ctx.message,user)
@@ -1247,7 +1247,7 @@ async def on_message(message):
 
   test=await client.get_context(message)
   if message.content.startswith(discordprefix) and mention == False and not message.author.bot and test.valid is False:
-    pfp = message.author.avatar_url
+    pfp = message.author.display_avatar.url
     time_used=(message.created_at).strftime('%m/%d/%Y %H:%M:%S')
     embed_message = discord.Embed(title=f" {message.content}", description=time_used,color=random.randint(0, 16777215))
     embed_message.set_author(name=f"{message.author} tried to excute invalid command:",icon_url=(pfp))

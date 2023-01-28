@@ -10,7 +10,7 @@ class Dice(commands.Cog):
     embed_message = discord.Embed(title=f" Rolled a {random.randint(1,20)}", color=random.randint(0, 16777215),timestamp=(ctx.message.created_at))
     embed_message.set_footer(text = f"{ctx.author.id}")
     embed_message.set_thumbnail(url="https://i.imgur.com/AivZBWP.png")
-    embed_message.set_author(name=f"d20 Rolled by {ctx.author}:",icon_url=(ctx.author.avatar_url))
+    embed_message.set_author(name=f"d20 Rolled by {ctx.author}:",icon_url=(ctx.author.display_avatar.url))
     embed_message.set_image(url="https://i.imgur.com/9dbBkqj.gif")
     await ctx.send(embed=embed_message)
 
@@ -37,7 +37,7 @@ class Dice(commands.Cog):
     embed_message = discord.Embed(title=f" Rolled a {random.randint(1,100)}", color=random.randint(0, 16777215),timestamp=(ctx.message.created_at))
     embed_message.set_footer(text = f"{ctx.author.id}")
     embed_message.set_thumbnail(url="https://i.imgur.com/AivZBWP.png")
-    embed_message.set_author(name=f"d100 Rolled by {ctx.author}:",icon_url=(ctx.author.avatar_url))
+    embed_message.set_author(name=f"d100 Rolled by {ctx.author}:",icon_url=(ctx.author.display_avatar.url))
     embed_message.set_image(url="https://i.imgur.com/gaLM6AG.gif")
     await ctx.send(embed=embed_message)
 
@@ -46,7 +46,7 @@ class Dice(commands.Cog):
     embed_message = discord.Embed(title=f" Rolled a {random.randint(1,12)}", color=random.randint(0, 16777215),timestamp=(ctx.message.created_at))
     embed_message.set_footer(text = f"{ctx.author.id}")
     embed_message.set_thumbnail(url="https://i.imgur.com/AivZBWP.png")
-    embed_message.set_author(name=f"d12 Rolled by {ctx.author}:",icon_url=(ctx.author.avatar_url))
+    embed_message.set_author(name=f"d12 Rolled by {ctx.author}:",icon_url=(ctx.author.display_avatar.url))
     embed_message.set_image(url="https://i.imgur.com/gaLM6AG.gif")
     await ctx.send(embed=embed_message)
 
@@ -55,7 +55,7 @@ class Dice(commands.Cog):
     embed_message = discord.Embed(title=f" Rolled a {random.randint(1,8)}", color=random.randint(0, 16777215),timestamp=(ctx.message.created_at))
     embed_message.set_footer(text = f"{ctx.author.id}")
     embed_message.set_thumbnail(url="https://i.imgur.com/AivZBWP.png")
-    embed_message.set_author(name=f"d8 Rolled by {ctx.author}:",icon_url=(ctx.author.avatar_url))
+    embed_message.set_author(name=f"d8 Rolled by {ctx.author}:",icon_url=(ctx.author.display_avatar.url))
     embed_message.set_image(url="https://i.imgur.com/gaLM6AG.gif")
     await ctx.send(embed=embed_message)
 
@@ -64,7 +64,7 @@ class Dice(commands.Cog):
     embed_message = discord.Embed(title=f" Rolled a {random.randint(1,4)}", color=random.randint(0, 16777215),timestamp=(ctx.message.created_at))
     embed_message.set_footer(text = f"{ctx.author.id}")
     embed_message.set_thumbnail(url="https://i.imgur.com/AivZBWP.png")
-    embed_message.set_author(name=f"d4 Rolled by {ctx.author}:",icon_url=(ctx.author.avatar_url))
+    embed_message.set_author(name=f"d4 Rolled by {ctx.author}:",icon_url=(ctx.author.display_avatar.url))
     embed_message.set_image(url="https://i.imgur.com/gaLM6AG.gif")
     await ctx.send(embed=embed_message)
 
@@ -87,7 +87,7 @@ class Dice(commands.Cog):
 
     embed = discord.Embed(title = f"How well does {item1} and {item2} work together?",  description = f"They work at a rate {item_relationship}% \n**{resp}**", color = random.randint(0, 16777215), timestamp = ctx.message.created_at)
 
-    embed.set_author(name=f"{ctx.author}", icon_url=(ctx.author.avatar_url))
+    embed.set_author(name=f"{ctx.author}", icon_url=(ctx.author.display_avatar.url))
 
     embed.set_footer(text = f"{ctx.author.id}")
 

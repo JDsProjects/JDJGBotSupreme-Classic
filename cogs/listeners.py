@@ -10,7 +10,7 @@ class Events(commands.Cog):
     channels = [channel for channel in guild_fetched.channels]
     roles = roles= [role for role in guild_fetched.roles]
     embed = discord.Embed(title="Bot just joined: "+str(guild_fetched.name), color=random.randint(0,16777215))
-    embed.set_thumbnail(url = guild_fetched.icon_url)
+    embed.set_thumbnail(url=guild_fetched.icon.url if guild_fetched.icon else "https://i.imgur.com/3ZUrjUP.png")
     embed.add_field(name='Server Name:',value=f'{guild_fetched.name}')
     embed.add_field(name='Server ID:',value=f'{guild_fetched.id}')
     embed.add_field(name='Server region:',value=f'{guild_fetched.region}')
@@ -27,7 +27,7 @@ class Events(commands.Cog):
     channels = [channel for channel in guild_fetched.channels]
     roles = roles= [role for role in guild_fetched.roles]
     embed = discord.Embed(title="Bot just left: "+str(guild_fetched.name), color=random.randint(0,16777215))
-    embed.set_thumbnail(url = guild_fetched.icon_url)
+    embed.set_thumbnail(url=guild_fetched.icon.url if guild_fetched.icon else "https://i.imgur.com/3ZUrjUP.png")
     embed.add_field(name='Server Name:',value=f'{guild_fetched.name}')
     embed.add_field(name='Server ID:',value=f'{guild_fetched.id}')
     embed.add_field(name='Server region:',value=f'{guild_fetched.region}')
