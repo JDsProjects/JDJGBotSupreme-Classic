@@ -13,14 +13,13 @@ class Events(commands.Cog):
     embed.set_thumbnail(url=guild_fetched.icon.url if guild_fetched.icon else "https://i.imgur.com/3ZUrjUP.png")
     embed.add_field(name='Server Name:',value=f'{guild_fetched.name}')
     embed.add_field(name='Server ID:',value=f'{guild_fetched.id}')
-    embed.add_field(name='Server region:',value=f'{guild_fetched.region}')
     embed.add_field(name='Server Creation Date:',value=f'{guild_fetched.created_at}')
     embed.add_field(name='Server Owner:',value=f'{guild_fetched.owner}')
     embed.add_field(name='Server Owner ID:',value=f'{guild_fetched.owner.id}')
     embed.add_field(name='Member Count:',value=f'{guild_fetched.member_count}')
     embed.add_field(name='Amount of Channels:',value=f"{len(channels)}")
     embed.add_field(name='Amount of Roles:',value=f"{len(roles)}")
-    await self.bot.get_channel(921939352769167360).send(embed=embed)
+    await self.bot.get_channel(996864571962839143).send(embed=embed)
 
   @commands.Cog.listener()
   async def on_guild_remove(self, guild_fetched):
@@ -30,7 +29,6 @@ class Events(commands.Cog):
     embed.set_thumbnail(url=guild_fetched.icon.url if guild_fetched.icon else "https://i.imgur.com/3ZUrjUP.png")
     embed.add_field(name='Server Name:',value=f'{guild_fetched.name}')
     embed.add_field(name='Server ID:',value=f'{guild_fetched.id}')
-    embed.add_field(name='Server region:',value=f'{guild_fetched.region}')
     embed.add_field(name='Server Creation Date:',value=f'{guild_fetched.created_at}')
     embed.add_field(name='Server Owner:',value=f'{guild_fetched.owner}')
     try:
@@ -44,7 +42,7 @@ class Events(commands.Cog):
     embed.add_field(name='Amount of Channels:',value=f"{len(channels)}")
     embed.add_field(name='Amount of Roles:',value=f"{len(roles)}")
 
-    await self.bot.get_channel(921939352769167360).send(embed=embed)
+    await self.bot.get_channel(996864571962839143).send(embed=embed)
 
   
   @commands.Cog.listener()

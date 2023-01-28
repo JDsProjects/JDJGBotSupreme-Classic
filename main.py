@@ -156,7 +156,7 @@ async def order(ctx,*,args=None):
     embed.set_image(url=emoji_image.image_url)
     embed.set_footer(text = f"{ctx.author.id} \nCopyright: I don't know the copyright.")
     await ctx.send(content="Order has been logged for safety purposes(we want to make sure no unsafe search is sent)",embed=embed)
-    await client.get_channel(921939352769167360).send(embed=embed)
+    await client.get_channel(996864571962839143).send(embed=embed)
 
 @client.command(brief="a command to get the avatar of a user",help="using the userinfo technology it now powers avatar grabbing.",aliases=["pfp",])
 async def avatar(ctx,*,user: BetterUserconverter = None): 
@@ -198,7 +198,7 @@ async def mail(ctx,*,user: BetterUserconverter=None):
       await user.create_dm()
     await user.send(embed=embed_message)
     embed_message.add_field(name="Sent To:",value=str(user))
-    await client.get_channel(921939352769167360).send(embed=embed_message)
+    await client.get_channel(996864571962839143).send(embed=embed_message)
 
 @order.command(brief="a command to shuffle images from google images")
 async def shuffle(ctx,*,args=None):
@@ -223,7 +223,7 @@ async def shuffle(ctx,*,args=None):
     embed.set_image(url=emoji_image.image_url)
     embed.set_footer(text = f"{ctx.author.id} \nCopyright: I don't know the copyright.")
     await ctx.send(content="Order has been logged for safety purposes(we want to make sure no unsafe search is sent)",embed=embed)
-    await client.get_channel(921939352769167360).send(embed=embed)
+    await client.get_channel(996864571962839143).send(embed=embed)
 
 @client.command(brief="a command to shuffle images from google images",aliases=["order-shuffle"])
 async def order_shuffle(ctx,*,args):
@@ -248,7 +248,7 @@ async def order_shuffle(ctx,*,args):
     embed.set_image(url=emoji_image.image_url)
     embed.set_footer(text = f"{ctx.author.id} \nCopyright: I don't know the copyright.")
     await ctx.send(content="Order has been logged for safety purposes(we want to make sure no unsafe search is sent)",embed=embed)
-    await client.get_channel(921939352769167360).send(embed=embed)
+    await client.get_channel(996864571962839143).send(embed=embed)
 
 @client.command(help="a hug command to hug people",brief="this the first command to hug.")
 async def hug(ctx,*, Member: BetterMemberConverter=None):
@@ -658,7 +658,6 @@ async def guildinfo(ctx,guild):
   embed = discord.Embed(title="Guild Info:",color=random.randint(0, 16777215))
   embed.add_field(name="Server Name:",value=guild.name)
   embed.add_field(name="Server ID:",value=guild.id)
-  embed.add_field(name="Server region",value=guild.region)
   embed.add_field(name="Server created at:",value=f"{guild.created_at} UTC")
   embed.add_field(name="Server Owner:",value=guild.owner)
   embed.add_field(name="Member Count:",value=guild.member_count)
@@ -911,7 +910,7 @@ async def on_message(message):
   if message.reference != None and not message.content.startswith(discordprefix) and not message.author.bot:
     if message.mentions != None and client.user in message.mentions:
       jdjg=client.get_user(168422909482762240)
-      await client.get_channel(921939352769167360).send(content=f"{jdjg.mention} {message} \n Content: {message.content} ")
+      await client.get_channel(996864571962839143).send(content=f"{jdjg.mention} {message} \n Content: {message.content} ")
     
 
   if not message.guild is None and not message.author.bot:
@@ -1253,7 +1252,7 @@ async def on_message(message):
     embed_message.set_author(name=f"{message.author} tried to excute invalid command:",icon_url=(pfp))
     embed_message.set_footer(text = f"{message.author.id}")
     embed_message.set_thumbnail(url="https://i.imgur.com/bW6ergl.png")
-    await client.get_channel(921939352769167360).send(embed=embed_message)
+    await client.get_channel(996864571962839143).send(embed=embed_message)
     await message.channel.send("That's not a valid command.")
     return
 
@@ -1342,7 +1341,7 @@ async def on_error(name,*arguments,**karguments):
           print(adID)
     except:
       print("\n can't DM them")
-    await client.get_channel(921939352769167360).send(embed=embed_message)
+    await client.get_channel(996864571962839143).send(embed=embed_message)
   if len(idle_error) > 2049:
     traceback.print_exc()
     print(f"\n{arguments}")
