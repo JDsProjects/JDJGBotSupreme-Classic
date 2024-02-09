@@ -1,224 +1,227 @@
 import random
+
 import _3D
+
+
 def invert(complete_color_code):
+    complete_color_code = complete_color_code.upper()
 
-  complete_color_code=complete_color_code.upper()
-  
+    # you might want to convert this to a database fetching for Cometspectrum
 
-  #you might want to convert this to a database fetching for Cometspectrum
+    Inverted_color_code = []
 
-  Inverted_color_code = []
+    Inverted_color_code_inverted = []
 
-  Inverted_color_code_inverted = []
+    # the arraries will be using later to store the inverted code.
 
-  #the arraries will be using later to store the inverted code.
+    times_ran_1 = 0
+    lines = complete_color_code.split("\n")
 
-  times_ran_1 = 0
-  lines=complete_color_code.split("\n")
+    # makes this into a list
 
-  #makes this into a list
+    # this is to check to make sure it will start at an actual value, rather than not starting at an actual value and causing the program to crash.
 
-  #this is to check to make sure it will start at an actual value, rather than not starting at an actual value and causing the program to crash.
+    # "" are added to make sure the code will match.
 
-  #"" are added to make sure the code will match.
+    x = int(times_ran_1)
 
-  x = int(times_ran_1)
+    color_counter = 0
+    times_ran_program_1 = 0
 
-  color_counter = 0
-  times_ran_program_1 = 0
+    # the actual inverter function is copied later and is slightly tweaked to be the inverted_color_code.
 
-  #the actual inverter function is copied later and is slightly tweaked to be the inverted_color_code. 
+    while x + 1 < len(lines):
+        color_value = lines[x]
 
+        color_value2 = lines[x + 1]
 
-  while x+1 < len(lines):
+        colored_bit = color_value.split(" ")
 
-    color_value = lines[x]
+        colored_bit2 = color_value2.split(" ")
 
-    color_value2 = lines[x+1]
+        color_code_front = colored_bit[0]
 
-    colored_bit=color_value.split(" ")
+        color_code_front2 = colored_bit2[0]
 
-    colored_bit2 = color_value2.split(" ")
+        color_section = colored_bit[1]
 
-    color_code_front = colored_bit[0]
+        color_section2 = colored_bit2[1]
+        r = int(color_section[0:2], 16)
+        g = int(color_section[2:4], 16)
+        b = int(color_section2[0:2], 16)
 
-    color_code_front2 = colored_bit2[0]
+        # fetches values from the values above(the inverter itself could be reused.)
+        r = 0xFF - r
+        g = 0xFF - g
+        b = 0xFF - b
 
-    color_section = colored_bit[1]
+        bits_used998 = f"{r:0{2}x}{g:0{2}x}{b:0{2}x}"
 
-    color_section2 = colored_bit2[1]
-    r = int(color_section[0:2], 16)
-    g = int(color_section[2:4], 16)
-    b = int(color_section2[0:2], 16)
+        first_color_line = bits_used998[0:4].upper()
 
-    #fetches values from the values above(the inverter itself could be reused.)
-    r = 0xFF - r
-    g = 0xFF - g
-    b = 0xFF - b
+        second_color_line = bits_used998[4:6].upper()
 
-    bits_used998 = f"{r:0{2}x}{g:0{2}x}{b:0{2}x}"
+        # this works either way, but I wanted to make sure that the color code would be the same.
 
-    first_color_line =  bits_used998[0:4].upper()
+        color_code_needed = color_code_front + " " + first_color_line
 
-    second_color_line = bits_used998[4:6].upper()
+        color_code_needed_2 = color_code_front2 + " " + second_color_line + color_section2[2:4]
 
-    #this works either way, but I wanted to make sure that the color code would be the same.
+        Inverted_color_code.append(color_code_needed)
 
-    color_code_needed = color_code_front+" "+first_color_line
+        Inverted_color_code.append(color_code_needed_2)
 
-    color_code_needed_2 = color_code_front2+" "+second_color_line+color_section2[2:4]
+        x = x + 2
 
-    Inverted_color_code.append(color_code_needed)
+        color_counter = color_counter + 1
 
-    Inverted_color_code.append(color_code_needed_2)
+        times_ran_program_1 = times_ran_program_1 + 1
 
-    x = x +2
+    times_ran_1 = 0
 
-    color_counter = color_counter + 1
+    # the counter is set back to 0 and the values have been appended.
 
-    times_ran_program_1 = times_ran_program_1 + 1
+    times_ran_1 = 0
 
-  times_ran_1 = 0
+    # basically the same code as before.
 
-  #the counter is set back to 0 and the values have been appended.
+    z = int(times_ran_1)
 
-  times_ran_1 = 0
+    while z < len(Inverted_color_code):
+        color_value = Inverted_color_code[z]
 
-  #basically the same code as before.
+        color_value2 = Inverted_color_code[z + 1]
 
-  z = int(times_ran_1)
+        colored_bit = color_value.split(" ")
 
-  while z < len(Inverted_color_code):
+        colored_bit2 = color_value2.split(" ")
 
-    color_value = Inverted_color_code[z]
+        color_code_front = colored_bit[0]
 
-    color_value2 = Inverted_color_code[z+1]
+        color_code_front2 = colored_bit2[0]
 
-    colored_bit=color_value.split(" ")
+        color_section = colored_bit[1]
 
-    colored_bit2 = color_value2.split(" ")
+        color_section2 = colored_bit2[1]
+        r = int(color_section[0:2], 16)
+        g = int(color_section[2:4], 16)
+        b = int(color_section2[0:2], 16)
+        r = 0xFF - r
+        g = 0xFF - g
+        b = 0xFF - b
 
-    color_code_front = colored_bit[0]
+        # this is basically the same code, as used before, but this time, it's using inverted_Color_code.
 
-    color_code_front2 = colored_bit2[0]
+        bits_used998 = f"{r:0{2}x}{g:0{2}x}{b:0{2}x}"
+        first_color_line = bits_used998[0:4].upper()
 
-    color_section = colored_bit[1]
+        second_color_line = bits_used998[4:6].upper()
+        color_code_needed_2 = color_code_front + " " + first_color_line
 
-    color_section2 = colored_bit2[1]
-    r = int(color_section[0:2], 16)
-    g = int(color_section[2:4], 16)
-    b = int(color_section2[0:2], 16)
-    r = 0xFF - r
-    g = 0xFF - g
-    b = 0xFF - b
+        color_code_needed_2 = color_code_front2 + " " + second_color_line + color_section2[2:4]
+        Inverted_color_code_inverted.append(color_code_needed)
 
-    #this is basically the same code, as used before, but this time, it's using inverted_Color_code.
+        Inverted_color_code_inverted.append(color_code_needed_2)
 
-    bits_used998 = f"{r:0{2}x}{g:0{2}x}{b:0{2}x}"
-    first_color_line =  bits_used998[0:4].upper()
+        # appends inverted color code.
 
-    second_color_line = bits_used998[4:6].upper()
-    color_code_needed_2 = color_code_front+" "+first_color_line
+        z = z + 2
 
-    color_code_needed_2 = color_code_front2+" "+second_color_line+color_section2[2:4]
-    Inverted_color_code_inverted.append(color_code_needed)
+    if Inverted_color_code_inverted == lines:
+        pass
 
-    Inverted_color_code_inverted.append(color_code_needed_2)
+        if not Inverted_color_code_inverted == lines:
+            pass
 
-    #appends inverted color code.
+    # checks if they are correct and match.
 
-    z = z +2
+    j = 0
 
+    test_string99 = ""
 
-  if Inverted_color_code_inverted == lines:
+    # this is adding the data back into a string.
 
-    pass
+    while j < len(Inverted_color_code):
+        test_string99 = test_string99 + (Inverted_color_code[j] + "\n")
 
-    if not Inverted_color_code_inverted == lines:
+        j = j + 1
 
-      pass
+    return test_string99
 
-  #checks if they are correct and match.
-      
-  j = 0
+    # orginally it would print it, but we will be returning this value.
 
-  test_string99 = ""
 
-  #this is adding the data back into a string.
-
-  while j < len(Inverted_color_code):
-
-    test_string99 = test_string99+(Inverted_color_code[j]+"\n")
-
-
-    j = j + 1
-
-  return test_string99
-
-  #orginally it would print it, but we will be returning this value.
-
-
-
+import discord
 
 import DatabaseConfig
-import discord
+
+
 def VaildateUser(_user):
-  try:
-    DatabaseConfig.db.color_code.insert_one({"user_id":_user.id,"color":"NULL"})
-    return 1
-  except:
-    return 0
-def get(_user):
-  VaildateUser(_user)
-  user = DatabaseConfig.db.color_code.find_one({"user_id":_user.id})
-  return user['color']
-def valid_cc(_user):
-  if(get(_user)=="NULL"):
-    return 0
-  return 1
-def save(_user, color_code):
-  VaildateUser(_user)
-  user = DatabaseConfig.db.color_code.find_one({"user_id":_user.id})
-  user['color'] = color_code
-  DatabaseConfig.db.color_code.delete_one({"user_id":_user.id})
-  DatabaseConfig.db.color_code.insert_one(user)
-
-async def veiw(_user,channel, wire,ins = 0):
-#  import Pixman
-#  _color_code = get(_user)
-#  if(ins):
-#    _color_code = invert(_color_code)
-#  decoder = Pixman.ram()
-#  image  = Pixman.get()
-#  image.decode(decoder.b(_color_code))
-#  image.render()
-#  image.export("render.png")
-
- # await channel.send("Color Code of "+_user.name+"```"
-  #+_color_code+"```")
- #await channel.send(file=discord.File('render.png'))
- async with channel.typing():
-    jdjg = 0
-    if(_user=="NULL"):
-      _color_code = ""
-      jdjg =1
-      ins =0
-    else:
-      jdjg = _user.id
-      _color_code = get(_user)
-    if(ins):
-      _color_code = invert(_color_code)
-    marioRender = _3D.mario()
-    marioRender.render(_color_code,wire,jdjg)
     try:
-      await channel.send("Color Code of "+_user.name+"```"+_color_code+"```")
+        DatabaseConfig.db.color_code.insert_one({"user_id": _user.id, "color": "NULL"})
+        return 1
     except:
-      banana = 1
-    await channel.send(file=discord.File('render.png'))
-    return
-async def veiw_raw(instructions,channel, wire):
-  async with channel.typing():
-    marioRender = _3D.mario()
-    marioRender.render(instructions,wire)
-    await channel.send(file=discord.File('render.png'))
-    return
+        return 0
+
+
+def get(_user):
+    VaildateUser(_user)
+    user = DatabaseConfig.db.color_code.find_one({"user_id": _user.id})
+    return user["color"]
+
+
+def valid_cc(_user):
+    if get(_user) == "NULL":
+        return 0
+    return 1
+
+
+def save(_user, color_code):
+    VaildateUser(_user)
+    user = DatabaseConfig.db.color_code.find_one({"user_id": _user.id})
+    user["color"] = color_code
+    DatabaseConfig.db.color_code.delete_one({"user_id": _user.id})
+    DatabaseConfig.db.color_code.insert_one(user)
+
+
+async def veiw(_user, channel, wire, ins=0):
+    #  import Pixman
+    #  _color_code = get(_user)
+    #  if(ins):
+    #    _color_code = invert(_color_code)
+    #  decoder = Pixman.ram()
+    #  image  = Pixman.get()
+    #  image.decode(decoder.b(_color_code))
+    #  image.render()
+    #  image.export("render.png")
+
+    # await channel.send("Color Code of "+_user.name+"```"
+    # +_color_code+"```")
+    # await channel.send(file=discord.File('render.png'))
+    async with channel.typing():
+        jdjg = 0
+        if _user == "NULL":
+            _color_code = ""
+            jdjg = 1
+            ins = 0
+        else:
+            jdjg = _user.id
+            _color_code = get(_user)
+        if ins:
+            _color_code = invert(_color_code)
+        marioRender = _3D.mario()
+        marioRender.render(_color_code, wire, jdjg)
+        try:
+            await channel.send("Color Code of " + _user.name + "```" + _color_code + "```")
+        except:
+            banana = 1
+        await channel.send(file=discord.File("render.png"))
+        return
+
+
+async def veiw_raw(instructions, channel, wire):
+    async with channel.typing():
+        marioRender = _3D.mario()
+        marioRender.render(instructions, wire)
+        await channel.send(file=discord.File("render.png"))
+        return
