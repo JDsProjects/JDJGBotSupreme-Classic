@@ -50,17 +50,19 @@ class UserCodes:
         self.isExisting(user_id)
 
         self.cached_doc = DatabaseConfig.db.users_testing.find_one({"user_id": user_id})
+        # will touch later.
 
         self.reg_codes = self.cached_doc["codes"]
 
-    def isExisting(user_id):
+    async def isExisting(user_id):
         try:
-            dummy_doc = DatabaseConfig.db.users_testing.find_one({"user_id": user_id})
+            dummy_doc = await DatabaseConfig.db.users_testing.find_one({"user_id": user_id})
             dumy_string = dummy_doc["user_id"]
             return True
         except:
             try:
-                dummy_doc = DatabaseConfig.db.users_testing.find_one({"user_id": user_id})
+                dummy_doc = await DatabaseConfig.db.users_testing.find_one({"user_id": user_id})
+                
                 dummy_doc["user_id"]
                 # if we have made it past this point it means all we
                 # have to do is update the struct
@@ -71,12 +73,12 @@ class UserCodes:
                     "last_exp": dummy_doc["last_exp"],
                     "codes": [],
                 }
-                DatabaseConfig.users_testing.delete_one({"user_id": user_id})
-                DatabaseConfig.db.users_testing.insert_one(new_doc)
+                await DatabaseConfig.users_testing.delete_one({"user_id": user_id})
+                await DatabaseConfig.db.users_testing.insert_one(new_doc)
             except:
                 # user has never used JDBot before
                 new_doc = {"user_id": user_id, "level": 0, "exp": 0, "last_exp": 0, "codes": []}
-                DatabaseConfig.db.users_testing.insert_one(new_doc)
+                await DatabaseConfig.db.users_testing.insert_one(new_doc)
 
     # this function will take a user's intput of what type
     # they are looking for and it will turn that into a valid

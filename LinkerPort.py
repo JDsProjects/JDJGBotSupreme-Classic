@@ -133,14 +133,14 @@ jdjg_bot_linker = (
 import DatabaseConfig
 
 
-def exists(src=0, dest=0):
+async def exists(src=0, dest=0):
     a = "1"
     if (src != 556242984241201167) and (dest != 556242984241201167):
         return 1
     if src != 0:
-        a = DatabaseConfig.find_one({"src": src})
+        a = await DatabaseConfig.find_one({"src": src})
     if dest != 0:
-        a = DatabaseConfig.find_one({"dest": dest})
+        a = await DatabaseConfig.find_one({"dest": dest})
     try:
         b = int(a)
         return 0
@@ -152,7 +152,7 @@ def send_doc(doc):
     src = int(doc["from"])
     dest = int(doc["to"])
     if not exists(src):
-        DatabaseConfig.db.ChannelLink.insert_one({"src": src, "dest": dest})
+        await DatabaseConfig.db.ChannelLink.insert_one({"src": src, "dest": dest})
 
 
 def port():

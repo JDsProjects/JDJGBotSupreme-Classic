@@ -36,7 +36,7 @@ async def UpdateScore(message):
     user = message.author
     if CheckIfExisting(user) == 1:
         now = datetime.datetime.now()
-        doc = DatabaseConfig.db.users_testing.find_one({"user_id": user.id})
+        doc = await DatabaseConfig.db.users_testing.find_one({"user_id": user.id})
         exp = int(doc["exp"])
         level = int(doc["level"])
         next_level_exp = GetNextLevelUp(level)
@@ -44,7 +44,7 @@ async def UpdateScore(message):
             exp = exp + 10
         if exp > next_level_exp + GetNextLevelUp(level - 1):
             level = doc["level"] + 1
-            doc2 = DatabaseConfig.db.server_settings.find_one({"ser_id": message.guild.id})
+            doc2 = await DatabaseConfig.db.server_settings.find_one({"ser_id": message.guild.id})
             try:
                 if doc2["st"] == 1:
                     await message.channel.send(
@@ -60,10 +60,10 @@ async def UpdateScore(message):
         DatabaseConfig.db.users_testing.insert_one(doc)
 
 
-def GetRank(user, server="all"):
+async def GetRank(user, server="all"):
     ret = []
-    user_dat = DatabaseConfig.db.users_testing.find_one({"user_id": user.id})
-    for doc in DatabaseConfig.db.users_testing.find():
+    user_dat = await DatabaseConfig.db.users_testing.find_one({"user_id": user.id})
+    async for doc in DatabaseConfig.db.users_testing.find():
         if server == "all":
             ret.append(int(doc["exp"]))
         else:
@@ -97,7 +97,7 @@ async def GetTop10(client, message):
             i = i + 1
             if i < 10:
                 try:
-                    doc = DatabaseConfig.db.users_testing.find_one({"exp": xp})
+                    doc = await DatabaseConfig.db.users_testing.find_one({"exp": xp})
                     embedVar.add_field(
                         name="#" + str(i + 1) + ". " + str(client.get_user(doc["user_id"])),
                         value=str(doc["exp"]),
@@ -110,7 +110,7 @@ async def GetTop10(client, message):
         embedVar = discord.Embed(title="Top 10 Leaderboard [Local]")
         for users in message.guild.members:
             try:
-                ret.append(int(DatabaseConfig.db.users_testing.find_one({"user_id": users.id})["exp"]))
+                ret.append(int(await DatabaseConfig.db.users_testing.find_one({"user_id": users.id})["exp"]))
             except:
                 banana = 0
         ret.sort(reverse=True)
@@ -118,7 +118,7 @@ async def GetTop10(client, message):
         for xp in ret:
             i = i + 1
             if i < 10:
-                doc = DatabaseConfig.db.users_testing.find_one({"exp": xp})
+                doc = await DatabaseConfig.db.users_testing.find_one({"exp": xp})
                 embedVar.add_field(
                     name="#" + str(i + 1) + ". " + str(client.get_user(doc["user_id"])),
                     value=str(doc["exp"]),
@@ -145,7 +145,7 @@ async def GetStatus(_message, _user="NULL"):
     else:
         user = _user
     if CheckIfExisting(user) == 1:
-        doc = DatabaseConfig.db.users_testing.find_one({"user_id": user.id})
+        doc = await DatabaseConfig.db.users_testing.find_one({"user_id": user.id})
         level = int(doc["level"])
         exp = int(doc["exp"])
         next_level_exp = GetNextLevelUp(level)
@@ -179,7 +179,7 @@ async def DevGetStatus(client, message):
     doc = ""
     user = client.get_user(GetUserByName(client, message))
     if CheckIfExisting(user) == 1:
-        doc = DatabaseConfig.db.users_testing.find_one({"user_id": user.id})
+        doc = await DatabaseConfig.db.users_testing.find_one({"user_id": user.id})
         level = int(doc["level"])
         exp = int(doc["exp"])
         next_level_exp = GetNextLevelUp(level)
@@ -194,13 +194,13 @@ async def DevGetStatus(client, message):
         await message.channel.send(embed=embedVar)
 
 
-def ToggleLevelUpMsg(message):
+async def ToggleLevelUpMsg(message):
     try:
-        DatabaseConfig.db.server_settings.insert_one({"ser_id": message.guild.id, "st": 1})
+        await DatabaseConfig.db.server_settings.insert_one({"ser_id": message.guild.id, "st": 1})
         ret_str = "Level Up Messages Enabled"
     except:
         ret_str = ""
-        doc = DatabaseConfig.db.server_settings.find_one({"ser_id": message.guild.id})
+        doc = await DatabaseConfig.db.server_settings.find_one({"ser_id": message.guild.id})
         st = doc["st"]
         if st == 1:
             st = 0
@@ -208,6 +208,6 @@ def ToggleLevelUpMsg(message):
         else:
             st = 1
             ret_str = "Level Up Messages Disabled"
-        DatabaseConfig.db.server_settings.delete_one(doc)
-        DatabaseConfig.db.server_settings.insert_one({"ser_id": message.guild.id, "st": st})
+        await DatabaseConfig.db.server_settings.delete_one(doc)
+        await DatabaseConfig.db.server_settings.insert_one({"ser_id": message.guild.id, "st": st})
         return ret_str

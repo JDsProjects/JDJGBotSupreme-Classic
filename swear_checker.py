@@ -43,8 +43,8 @@ col = DatabaseConfig.db.server_settings
 cmp_list = bad_words.append(sexual_words)
 
 
-def filter_words(message, guild):
-    doc = col.find_one({"ser_id": guild})
+async def filter_words(message, guild):
+    doc = await col.find_one({"ser_id": guild})
     endings = ["ing", "er", "ist", "ed", "en", "tion", ""]
     message = message.lower()
     words_found = []

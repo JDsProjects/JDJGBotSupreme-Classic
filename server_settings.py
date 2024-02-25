@@ -12,10 +12,10 @@ def toggle_bool(_bool):
         return 1
 
 
-def setup_server(guild):
+async def setup_server(guild):
     try:
-        doc = col.find_one({"ser_id": guild.id})
-        col.delete_one({"ser_id": guild.id})
+        doc = await col.find_one({"ser_id": guild.id})
+        await col.delete_one({"ser_id": guild.id})
     except:
         doc = "NULL"
     try:
@@ -46,8 +46,8 @@ def setup_server(guild):
     return doc
 
 
-def change_setting(guild, setting, args):
-    doc = setup_server(guild)
+async def change_setting(guild, setting, args):
+    doc = await setup_server(guild)
     # setting
     #   1 - Level Up Messages
     #   2 - Safe Server
@@ -82,7 +82,7 @@ def change_setting(guild, setting, args):
         doc["admins"].append(args)
     if setting == 6:
         doc["ban"].append(args)
-    col.insert_one(doc)
+    await col.insert_one(doc)
 
 
 def view(guild):

@@ -164,7 +164,7 @@ def VaildateUser(_user):
         return 0
 
 
-def get(_user):
+async def get(_user):
     VaildateUser(_user)
     user = DatabaseConfig.db.color_code.find_one({"user_id": _user.id})
     return user["color"]
@@ -176,12 +176,12 @@ def valid_cc(_user):
     return 1
 
 
-def save(_user, color_code):
+async def save(_user, color_code):
     VaildateUser(_user)
-    user = DatabaseConfig.db.color_code.find_one({"user_id": _user.id})
+    user = await DatabaseConfig.db.color_code.find_one({"user_id": _user.id})
     user["color"] = color_code
-    DatabaseConfig.db.color_code.delete_one({"user_id": _user.id})
-    DatabaseConfig.db.color_code.insert_one(user)
+    await DatabaseConfig.db.color_code.delete_one({"user_id": _user.id})
+    await DatabaseConfig.db.color_code.insert_one(user)
 
 
 async def veiw(_user, channel, wire, ins=0):

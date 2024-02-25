@@ -14,16 +14,16 @@ def censor_text(message):
     return message
 
 
-def AddGlobalLink(client, message):
+async def AddGlobalLink(client, message):
     this = message.channel.id
     thisSer = message.guild.id
-    tmp_doc = DatabaseConfig.db.g_link_testing.find_one({"ser_id": thisSer})
+    tmp_doc = await DatabaseConfig.db.g_link_testing.find_one({"ser_id": thisSer})
     try:
-        DatabaseConfig.db.g_link_testing.insert_one({"ser_id": thisSer, "chan_id": this})
+        await DatabaseConfig.db.g_link_testing.insert_one({"ser_id": thisSer, "chan_id": this})
         return "Global Link Added!"
     except:
-        DatabaseConfig.db.g_link_testing.delete_one(tmp_doc)
-        DatabaseConfig.db.g_link_testing.insert_one({"ser_id": thisSer, "chan_id": this})
+        await DatabaseConfig.db.g_link_testing.delete_one(tmp_doc)
+        await DatabaseConfig.db.g_link_testing.insert_one({"ser_id": thisSer, "chan_id": this})
         return "This server already had a Global Chat Room so the old one was deleted and this channel has been Linked instead!"
 
 
@@ -144,7 +144,7 @@ async def extend(message):
     if message.channel.id == 782123846781370368:
         return
     if message.channel.id != 782123846781370368 and not message.author.bot:
-        gChan = DatabaseConfig.db.g_link_testing.find_one({"ser_id": message.guild.id})
+        gChan = await DatabaseConfig.db.g_link_testing.find_one({"ser_id": message.guild.id})
         try:
             gChan["chan_id"]
         except:
@@ -197,8 +197,8 @@ async def respond(message):
                 # print("chanID: "+str(message.channel.id) + str(message.author) + str())
 
 
-def isGlobalChannel(channel_id):
-    doc = DatabaseConfig.db.g_link_testing.find_one({"chan_id": channel_id})
+async def isGlobalChannel(channel_id):
+    doc = await DatabaseConfig.db.g_link_testing.find_one({"chan_id": channel_id})
     if doc == None:
         return False
     return True

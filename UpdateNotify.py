@@ -45,36 +45,36 @@ async def UpdateNote(message, client):
                 {"ser_id": message.guild.id, "title": args[0], "body_head": "NULL", "body": "NULL"}
             )
         except:
-            doc = DatabaseConfig.db.update_note.find_one({"ser_id": message.guild.id})
-            DatabaseConfig.db.update_note.delete_one(doc)
-            DatabaseConfig.db.update_note.insert_one(
+            doc = await DatabaseConfig.db.update_note.find_one({"ser_id": message.guild.id})
+            await DatabaseConfig.db.update_note.delete_one(doc)
+            await DatabaseConfig.db.update_note.insert_one(
                 {"ser_id": doc["ser_id"], "title": args[0], "body_head": doc["body_head"], "body": doc["body"]}
             )
     if mode == "[body_head]":
         try:
-            DatabaseConfig.db.update_note.insert_one(
+            await DatabaseConfig.db.update_note.insert_one(
                 {"ser_id": message.guild.id, "title": "NULL", "body_head": args[0], "body": "NULL"}
             )
         except:
-            doc = DatabaseConfig.db.update_note.find_one({"ser_id": message.guild.id})
-            DatabaseConfig.db.update_note.delete_one(doc)
-            DatabaseConfig.db.update_note.insert_one(
+            doc = await DatabaseConfig.db.update_note.find_one({"ser_id": message.guild.id})
+            await DatabaseConfig.db.update_note.delete_one(doc)
+            await DatabaseConfig.db.update_note.insert_one(
                 {"ser_id": doc["ser_id"], "title": doc["title"], "body_head": args[0], "body": doc["body"]}
             )
     if mode == "[body]":
         try:
-            DatabaseConfig.db.update_note.insert_one(
+            await DatabaseConfig.db.update_note.insert_one(
                 {"ser_id": message.guild.id, "title": "NULL", "body_head": "NULL", "body": args[0]}
             )
         except:
-            doc = DatabaseConfig.db.update_note.find_one({"ser_id": message.guild.id})
-            DatabaseConfig.db.update_note.delete_one(doc)
-            DatabaseConfig.db.update_note.insert_one(
+            doc = await DatabaseConfig.db.update_note.find_one({"ser_id": message.guild.id})
+            await DatabaseConfig.db.update_note.delete_one(doc)
+            await DatabaseConfig.db.update_note.insert_one(
                 {"ser_id": doc["ser_id"], "title": doc["title"], "body_head": doc["body_head"], "body": args[0]}
             )
     if mode == "[preview]":
         try:
-            doc = DatabaseConfig.db.update_note.find_one({"ser_id": message.guild.id})
+            doc = await DatabaseConfig.db.update_note.find_one({"ser_id": message.guild.id})
         except:
             banana = 0
         embedVar = discord.Embed(title=doc["title"])
@@ -85,9 +85,9 @@ async def UpdateNote(message, client):
     if mode == "[set]":
         await message.channel.send(SetChannel(message))
     if mode == "[send]":
-        doc = DatabaseConfig.db.server_settings.find_one({"ser_id": message.guild.id})
+        doc = await DatabaseConfig.db.server_settings.find_one({"ser_id": message.guild.id})
         try:
-            doc1 = DatabaseConfig.db.update_note.find_one({"ser_id": message.guild.id})
+            doc1 = await DatabaseConfig.db.update_note.find_one({"ser_id": message.guild.id})
             embedVar = discord.Embed(title=doc1["title"])
             embedVar.add_field(name=doc1["body_head"], value=doc1["body"], inline=True)
             await client.get_channel(doc["up_chan"]).send(embed=embedVar)
@@ -99,16 +99,16 @@ async def UpdateNote(message, client):
             )
 
 
-def SetChannel(message):
+async def SetChannel(message):
     try:
-        DatabaseConfig.db.server_settings.insert_one(
+        await DatabaseConfig.db.server_settings.insert_one(
             {"ser_id": message.guild.id, "st": 0, "up_chan": message.channel.id}
         )
         return "Update Channel Linked"
     except:
-        doc = DatabaseConfig.db.server_settings.find_one({"ser_id": message.guild.id})
-        DatabaseConfig.db.server_settings.delete_one(doc)
-        DatabaseConfig.db.server_settings.insert_one(
+        doc = await DatabaseConfig.db.server_settings.find_one({"ser_id": message.guild.id})
+        await DatabaseConfig.db.server_settings.delete_one(doc)
+        await DatabaseConfig.db.server_settings.insert_one(
             {"ser_id": message.guild.id, "st": doc["st"], "up_chan": message.channel.id}
         )
         return "There was already a channel set to recive updates so it was deleted and this one was linked instead!"
