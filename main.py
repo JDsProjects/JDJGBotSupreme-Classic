@@ -619,7 +619,7 @@ async def milk(ctx):
 
 @client.command(help="gives you who the owner is.")
 async def owner(ctx):
-    info = await client.application_info()
+    info = client.application
     if info.team is None:
         owner = info.owner.id
     if info.team:
@@ -689,7 +689,7 @@ async def owner(ctx):
     brief="this command works if you are in team otherwise it will just give the owner.",
 )
 async def team(ctx):
-    information = await client.application_info()
+    information = client.application
     if information.team == None:
         true_owner = information.owner
         team_members = []
